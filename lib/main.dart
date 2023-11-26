@@ -15,8 +15,10 @@ import 'Features/home/presentation/manager/newest_books/newest_books_cubit.dart'
 void main() async {
   setupServiceLocator();
   Bloc.observer = SimpleBlocObserver();
+  await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox(kFeaturedBox);
+  await Hive.openBox<BookEntity>(kFeaturedBox);
+  await Hive.openBox<BookEntity>(kNewestBox);
 
   runApp(const BooklyApp());
 }
